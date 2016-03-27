@@ -38,11 +38,14 @@ submit.addEventListener('click', function(){
 		'picksPerRun': picksPerRun,
 		'numSpecies': numSpecies
 	}
-	console.log(projArgs);
+	
+	// Create Species Objects
 
 	// Store Project as SessionStorage
 	for ( var prop in projArgs ) {
 		console.log(prop);
-		sessionStorage.setItem(prop, projArgs[prop]);
+		sessionStorage.setItem('klein_' + prop, projArgs[prop]);
 	}
+
+	window.location = '../kleinulator/results.html';
 })
