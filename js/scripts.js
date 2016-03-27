@@ -2,9 +2,21 @@
 var numSpeciesContainer = document.getElementById('numSpecies');
 numSpeciesContainer.addEventListener('change', function(){
 	var spec_num = numSpeciesContainer.value;
+	var spec_row = "<td class='spec_name'><input placeholder='Species Name'></input></td><td class='spec_range_bot'><input placeholder='Range Min'></input></td><td class='spec_range_top'><input placeholder='Range Max'></input></td>";
+	var spec_tgt = document.getElementById('species-container');
+	if(spec_tgt.innerHTML != "") { 
+		spec_tgt.innerHTML = "";
+	}
 	var i;
 	for(i=0; i<spec_num; i++) {
-		
+	
+		var spec_row_container = document.createElement('tr');
+		spec_row_container.innerHTML = spec_row;
+		spec_tgt.appendChild(spec_row_container);
+		spec_row_container.id = "spec_row_" + (i+1);
+
+		console.log(spec_row_container);
+
 	}
 });
 
