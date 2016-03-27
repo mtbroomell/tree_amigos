@@ -29,6 +29,9 @@ submit.addEventListener('click', function(){
 	var runAmt = document.getElementById('runAmt').value;
 	var picksPerRun = document.getElementById('picksPerRun').value;
 	var numSpecies = document.getElementById('numSpecies').value;
+	var rangeMin = document.getElementById('rangeMin').value;
+	var rangeMax = document.getElementById('rangeMax').value;
+
 
 	// Create new Project Object
 	var projArgs = {
@@ -36,14 +39,15 @@ submit.addEventListener('click', function(){
 		'title': title,
 		'runAmt': runAmt,
 		'picksPerRun': picksPerRun,
-		'numSpecies': numSpecies
+		'numSpecies': numSpecies,
+		'rangeMin': rangeMin,
+		'rangeMax': rangeMax
 	}
 	
 	// Create Species Objects
 
 	// Store Project as SessionStorage
 	for ( var prop in projArgs ) {
-		console.log(prop);
 		sessionStorage.setItem('klein_' + prop, projArgs[prop]);
 	}
 
