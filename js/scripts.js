@@ -32,7 +32,6 @@ submit.addEventListener('click', function(){
 	var rangeMin = document.getElementById('rangeMin').value;
 	var rangeMax = document.getElementById('rangeMax').value;
 
-
 	// Create new Project Object
 	var projArgs = {
 		'name': name,
@@ -43,8 +42,28 @@ submit.addEventListener('click', function(){
 		'rangeMin': rangeMin,
 		'rangeMax': rangeMax
 	}
-	
-	// Create Species Objects
+
+	// Species Objects
+	// For each species row, create a csv string in the pattern of {species name, min range, max range, id#}
+	// Then store that string as an individual session storage item
+	// Before setting Species, clear SessionStorage of an species storage by key prefix identifier
+	// Then Set SessionStorage for each species Row
+	var a;
+	for(a=0; a<sessionStorage.length; a++) {
+
+		if("species_".indexOf($(sessionStorage.key(a))) ){
+			var temp = $(sessionStorage.key(a));
+			$(sessionStorage.removeItem(temp['selector']));
+		}
+	}
+	var species = $('.spec_row');
+	var i;
+	for(i=0; i<species.length; i++) {
+		var spec_name = $(species[i]).find('.spec_name input')[0].value;
+		var spec_range_min = $(species[i]).find('.spec_range_bot input')[0].value;
+		var spec_range_top = $(species[i]).find('.spec_range_top input')[0].value;
+		sessionStorage.setItem('species_'+(i+1), spec_name + ", " + spec_range_min + ", " + spec_range_top);
+	}
 
 	// Store Project as SessionStorage
 	for ( var prop in projArgs ) {
