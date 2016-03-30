@@ -36,8 +36,8 @@ $(document).ready(function(){
 			}	
 		}
 	}
-	// Project Info
 
+	// Project Info
 	for(var i = 0; i < species.length; i++) {
 		var row = $("<td>" + species[i].sp_name + "</td><td>" + species[i].sp_hit + "</td>");
 		$('#results-table tbody').append(row);

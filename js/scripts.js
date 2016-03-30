@@ -52,7 +52,9 @@ submit.addEventListener('click', function(){
 		var spec_name = $(species[i]).find('.spec_name input')[0].value;
 		var spec_range_min = $(species[i]).find('.spec_range_bot input')[0].value;
 		var spec_range_top = $(species[i]).find('.spec_range_top input')[0].value;
-		sessionStorage.setItem('species_'+(i+1), spec_name + ", " + spec_range_min + ", " + spec_range_top);
+		if(spec_name != "" && spec_range_min != "" && spec_range_top != "") {
+			sessionStorage.setItem('species_'+(i+1), spec_name + ", " + spec_range_min + ", " + spec_range_top);			
+		}
 	}
 
 	// Store Project as SessionStorage
