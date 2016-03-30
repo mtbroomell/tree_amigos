@@ -39,12 +39,12 @@ $(document).ready(function(){
 
 	// Project Info
 	var proj_name = sessionStorage.getItem('klein_name');
-	var proj_numspec = sessionStorage.getItem('klein_numSpecies');
-	var proj_ppr = sessionStorage.getItem('klein_picksPerRun');
-	var proj_ranmax = sessionStorage.getItem('klein_rangeMax');
-	var proj_ranmin = sessionStorage.getItem('klein_rangeMin');
+	var proj_numspec = filterInt(sessionStorage.getItem('klein_numSpecies'));
+	var proj_ppr = filterInt(sessionStorage.getItem('klein_picksPerRun'));
+	var proj_ranmax = filterInt(sessionStorage.getItem('klein_rangeMax'));
+	var proj_ranmin = filterInt(sessionStorage.getItem('klein_rangeMin'));
 	var proj_title = sessionStorage.getItem('klein_title');
-	var proj_runamt = sessionStorage.getItem('klein_runAmt');
+	var proj_runamt = filterInt(sessionStorage.getItem('klein_runAmt'));
 
 	var proj_args = {
 		'name': proj_name,

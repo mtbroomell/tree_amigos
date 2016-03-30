@@ -1,10 +1,3 @@
-// Helper Functions
-filterInt = function (value) {
-  if(/^(\-|\+)?([0-9]+|Infinity)$/.test(value))
-    return Number(value);
-  return NaN;
-}
-
 // Form Listener - dynamically add rows for amount of species
 var numSpeciesContainer = document.getElementById('numSpecies');
 numSpeciesContainer.addEventListener('change', function(){
