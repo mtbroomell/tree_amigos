@@ -38,8 +38,35 @@ $(document).ready(function(){
 	}
 
 	// Project Info
+	var proj_name = sessionStorage.getItem('klein_name');
+	var proj_numspec = sessionStorage.getItem('klein_numSpecies');
+	var proj_ppr = sessionStorage.getItem('klein_picksPerRun');
+	var proj_ranmax = sessionStorage.getItem('klein_rangeMax');
+	var proj_ranmin = sessionStorage.getItem('klein_rangeMin');
+	var proj_title = sessionStorage.getItem('klein_title');
+	var proj_runamt = sessionStorage.getItem('klein_runAmt');
+
+	var proj_args = {
+		'name': proj_name,
+		'title': proj_title,
+		'runAmt': proj_runamt,
+		'picksPerRun': proj_ppr,
+		'numSpecies': proj_numspec,
+		'minRange': proj_ranmin,
+		'maxRange': proj_ranmax
+	}
+	var project = new Project(proj_args);
+	console.log(project);
+	console.log(project.rng());
+	console.log(project.rng());
+	console.log(project.rng());
+	console.log(project.rng());
+	console.log(project.rng());
+
+	// Project RunTime
 	for(var i = 0; i < species.length; i++) {
 		var row = $("<td>" + species[i].sp_name + "</td><td>" + species[i].sp_hit + "</td>");
 		$('#results-table tbody').append(row);
 	}
+
 });

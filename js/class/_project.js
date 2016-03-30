@@ -13,5 +13,6 @@ var Project = function(o){
 
 	this.rng = function() {
 		var ran = Math.floor(Math.random() * (this.maxRange - this.minRange + 1)) + this.minRange;
+		return ran;
 	}
 }

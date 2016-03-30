@@ -1,3 +1,10 @@
+// Helper Functions
+filterInt = function (value) {
+  if(/^(\-|\+)?([0-9]+|Infinity)$/.test(value))
+    return Number(value);
+  return NaN;
+}
+
 // Form Listener - dynamically add rows for amount of species
 var numSpeciesContainer = document.getElementById('numSpecies');
 numSpeciesContainer.addEventListener('change', function(){
@@ -26,11 +33,11 @@ submit.addEventListener('click', function(){
 	// Get Form Scope Vars
 	var name = document.getElementById('name').value;
 	var title = document.getElementById('title').value;
-	var runAmt = document.getElementById('runAmt').value;
-	var picksPerRun = document.getElementById('picksPerRun').value;
-	var numSpecies = document.getElementById('numSpecies').value;
-	var rangeMin = document.getElementById('rangeMin').value;
-	var rangeMax = document.getElementById('rangeMax').value;
+	var runAmt = filterInt(document.getElementById('runAmt').value);
+	var picksPerRun = filterInt(document.getElementById('picksPerRun').value);
+	var numSpecies = filterInt(document.getElementById('numSpecies').value);
+	var rangeMin = filterInt(document.getElementById('rangeMin').value);
+	var rangeMax = filterInt(document.getElementById('rangeMax').value);
 
 	// Create new Project Object
 	var projArgs = {
