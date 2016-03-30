@@ -44,18 +44,8 @@ submit.addEventListener('click', function(){
 	}
 
 	// Species Objects
-	// For each species row, create a csv string in the pattern of {species name, min range, max range, id#}
-	// Then store that string as an individual session storage item
-	// Before setting Species, clear SessionStorage of an species storage by key prefix identifier
-	// Then Set SessionStorage for each species Row
-	var a;
-	for(a=0; a<sessionStorage.length; a++) {
-
-		if("species_".indexOf($(sessionStorage.key(a))) ){
-			var temp = $(sessionStorage.key(a));
-			$(sessionStorage.removeItem(temp['selector']));
-		}
-	}
+	// Clear Session Storage prior to setting for results
+	sessionStorage.clear();
 	var species = $('.spec_row');
 	var i;
 	for(i=0; i<species.length; i++) {
