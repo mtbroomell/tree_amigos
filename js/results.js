@@ -29,8 +29,9 @@ $(document).ready(function(){
 				var subSplit = subTemp.split(", ");
 				var subTempObj = new Species({
 					'sp_name': subSplit[0],
-					'sp_low': subSplit[1],
-					'sp_high': subSplit[2]
+					'sp_low': filterInt(subSplit[1]),
+					'sp_high': filterInt(subSplit[2]),
+					'sp_hit': 0
 				});
 				species.push(subTempObj);
 			}	
@@ -56,17 +57,20 @@ $(document).ready(function(){
 		'maxRange': proj_ranmax
 	}
 	var project = new Project(proj_args);
-	console.log(project);
-	console.log(project.rng());
-	console.log(project.rng());
-	console.log(project.rng());
-	console.log(project.rng());
-	console.log(project.rng());
 
 	// Project RunTime
 	for(var i = 0; i < species.length; i++) {
-		var row = $("<td>" + species[i].sp_name + "</td><td>" + species[i].sp_hit + "</td>");
+		var row = $("<tr id='" + species[i].sp_name + "-row'><td>" + species[i].sp_name + "</td><td class='hit'>" + species[i].sp_hit + "</td></tr>");
 		$('#results-table tbody').append(row);
+	}
+	for(var i= 0; i < project.picksPerRun; i++){
+		ran = project.rng();
+		for(var a= 0; a < species.length; a++){
+			if(ran >= species[a].sp_low && ran <= species[a].sp_high){
+				species[a].sp_hit += 1;
+				$("#" + species[a].sp_name + "-row .hit").text(species[a].sp_hit);
+			}
+		}
 	}
 
 });
