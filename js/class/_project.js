@@ -11,7 +11,7 @@ var Project = function(o){
 	this.minRange = o.minRange;
 	this.maxRange = o.maxRange;
 
-	var rng = function() {
-		var ran = Math.floor(Math.random() * (maxRange - minRange + 1)) + minRange;
+	this.rng = function() {
+		var ran = Math.floor(Math.random() * (this.maxRange - this.minRange + 1)) + this.minRange;
 	}
 }

@@ -18,8 +18,6 @@
 })(document, window);
 
 $(document).ready(function(){
-	// Project Info
-
 	// Species Factory
 	var species = [];
 	for (var i = 0; i <= sessionStorage.length; ++i) {
@@ -38,6 +36,8 @@ $(document).ready(function(){
 			}	
 		}
 	}
+	// Project Info
+
 	for(var i = 0; i < species.length; i++) {
 		var row = $("<td>" + species[i].sp_name + "</td><td>" + species[i].sp_hit + "</td>");
 		$('#results-table tbody').append(row);
