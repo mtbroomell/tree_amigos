@@ -71,7 +71,7 @@ $(document).ready(function(){
 				}
 				if(i == (project.picksPerRun - 1)){
 					for(var a = 0; a < species.length; a++){
-						var row = $("<tr class='" + species[a].sp_name + "-row-" + b + "'><td class='species-label'>" + species[a].sp_name + "</td><td class='hit'>" + species[a].sp_hit + "</td></tr>");
+						var row = $("<td class='species-label'>" + species[a].sp_name + "</td><td class='hit'>" + species[a].sp_hit + "</td>");
 						row.appendTo(run_cont);
 						if(species[a].sp_hit == 0){
 							console.log(species[a].sp_name)
@@ -82,6 +82,11 @@ $(document).ready(function(){
 			// Append Run Results to the Table
 			$('#results-table tbody').append(run_cont);
 		}
+		// Create Run Table Header
+		var header_el = document.createElement('h3');
+		header_el.innerHTML = "Run #" + (b+1);
+		$(header_el).insertBefore(run_cont);
+		// Reset Hit Values
 		for(var a = 0; a < species.length; a++){
 			species[a].sp_hit = 0;
 		}
