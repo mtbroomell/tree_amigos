@@ -59,10 +59,6 @@ $(document).ready(function(){
 	var project = new Project(proj_args);
 
 	// Project RunTime
-	for(var i = 0; i < species.length; i++) {
-		var row = $("<tr id='" + species[i].sp_name + "-row'><td>" + species[i].sp_name + "</td><td class='hit'>" + species[i].sp_hit + "</td></tr>");
-		$('#results-table tbody').append(row);
-	}
 	for(var b = 0; b < project.runAmt; b++ ){
 		for(var i= 0; i < project.picksPerRun; i++){
 			ran = project.rng();
@@ -74,6 +70,9 @@ $(document).ready(function(){
 				if(i == (project.picksPerRun - 1)){
 					for(var a = 0; a < species.length; a++){
 						var row = $("<tr id='" + species[a].sp_name + "-row-" + b + "'><td>" + species[a].sp_name + "</td><td class='hit'>" + species[a].sp_hit + "</td></tr>");
+						if(species[a].sp_hit == 0){
+							console.log(species[a].sp_name)
+						}
 						$('#results-table tbody').append(row);
 					}
 				}
