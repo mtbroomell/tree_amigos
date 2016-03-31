@@ -60,6 +60,8 @@ $(document).ready(function(){
 
 	// Project RunTime
 	for(var b = 0; b < project.runAmt; b++ ){
+		// Create a Container for Each Run to append Final Results to
+		var run_cont = $('<tr id="run-' + (b+1) + '"></tr>')
 		for(var i= 0; i < project.picksPerRun; i++){
 			ran = project.rng();
 			for(var a= 0; a < species.length; a++){
@@ -69,14 +71,16 @@ $(document).ready(function(){
 				}
 				if(i == (project.picksPerRun - 1)){
 					for(var a = 0; a < species.length; a++){
-						var row = $("<tr id='" + species[a].sp_name + "-row-" + b + "'><td>" + species[a].sp_name + "</td><td class='hit'>" + species[a].sp_hit + "</td></tr>");
+						var row = $("<tr class='" + species[a].sp_name + "-row-" + b + "'><td class='species-label'>" + species[a].sp_name + "</td><td class='hit'>" + species[a].sp_hit + "</td></tr>");
+						row.appendTo(run_cont);
 						if(species[a].sp_hit == 0){
 							console.log(species[a].sp_name)
 						}
-						$('#results-table tbody').append(row);
 					}
 				}
 			}
+			// Append Run Results to the Table
+			$('#results-table tbody').append(run_cont);
 		}
 		for(var a = 0; a < species.length; a++){
 			species[a].sp_hit = 0;
