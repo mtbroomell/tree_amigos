@@ -63,14 +63,24 @@ $(document).ready(function(){
 		var row = $("<tr id='" + species[i].sp_name + "-row'><td>" + species[i].sp_name + "</td><td class='hit'>" + species[i].sp_hit + "</td></tr>");
 		$('#results-table tbody').append(row);
 	}
-	for(var i= 0; i < project.picksPerRun; i++){
-		ran = project.rng();
-		for(var a= 0; a < species.length; a++){
-			if(ran >= species[a].sp_low && ran <= species[a].sp_high){
-				species[a].sp_hit += 1;
-				$("#" + species[a].sp_name + "-row .hit").text(species[a].sp_hit);
+	for(var b = 0; b < project.runAmt; b++ ){
+		for(var i= 0; i < project.picksPerRun; i++){
+			ran = project.rng();
+			for(var a= 0; a < species.length; a++){
+				if(ran >= species[a].sp_low && ran <= species[a].sp_high) {
+					species[a].sp_hit += 1;
+					$("#" + species[a].sp_name + "-row .hit").text(species[a].sp_hit);
+				}
+				if(i == (project.picksPerRun - 1)){
+					for(var a = 0; a < species.length; a++){
+						var row = $("<tr id='" + species[a].sp_name + "-row-" + b + "'><td>" + species[a].sp_name + "</td><td class='hit'>" + species[a].sp_hit + "</td></tr>");
+						$('#results-table tbody').append(row);
+					}
+				}
 			}
 		}
+		for(var a = 0; a < species.length; a++){
+			species[a].sp_hit = 0;
+		}
 	}
-
 });
