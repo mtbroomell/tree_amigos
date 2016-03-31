@@ -83,7 +83,7 @@ $(document).ready(function(){
 			$('#results-table tbody').append(run_cont);
 		}
 		// Create Run Table Header
-		var header_el = document.createElement('h3');
+		var header_el = document.createElement('h2');
 		header_el.innerHTML = "Run #" + (b+1);
 		$(header_el).insertBefore(run_cont);
 		// Reset Hit Values
@@ -91,4 +91,5 @@ $(document).ready(function(){
 			species[a].sp_hit = 0;
 		}
 	}
+	$("tbody").collapse();
 });
