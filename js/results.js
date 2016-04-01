@@ -1,21 +1,25 @@
-(function(){
 
-	// TESTING Iterate over Session Storage
-	substr = "klein_"
-	for(var prop in sessionStorage) {
-		if(prop.indexOf(substr) > -1){
-			document.write(prop + " : " + sessionStorage[prop] + "<br/>");			
-		}
-	}
+// DEBUGGING FUNCTIONS BELOW
+// Uncomment to utilize
 
-	spec_sub = 'species_';
-	for(var prop in sessionStorage) {
-		if(prop.indexOf(spec_sub) > -1){
-			document.write(prop + " : " + sessionStorage[prop] + "<br/>");			
-		}
-	}	
+// (function(){
 
-})(document, window);
+// 	// TESTING Iterate over Session Storage
+// 	substr = "klein_"
+// 	for(var prop in sessionStorage) {
+// 		if(prop.indexOf(substr) > -1){
+// 			document.write(prop + " : " + sessionStorage[prop] + "<br/>");			
+// 		}
+// 	}
+
+// 	spec_sub = 'species_';
+// 	for(var prop in sessionStorage) {
+// 		if(prop.indexOf(spec_sub) > -1){
+// 			document.write(prop + " : " + sessionStorage[prop] + "<br/>");			
+// 		}
+// 	}	
+
+// })(document, window);
 
 $(document).ready(function(){
 	// Species Factory
@@ -60,8 +64,15 @@ $(document).ready(function(){
 
 	// Project RunTime
 	for(var b = 0; b < project.runAmt; b++ ){
+
 		// Create a Container for Each Run to append Final Results to
 		var run_cont = $('<tr id="run-' + (b+1) + '"></tr>')
+		// Richness Variable
+		var run_rich = project.numSpecies;
+		// SDS Variable
+		var SDS;
+
+		run_cont.append('<tr><th>Species Name</th><th>Hits</th></tr>')
 		for(var i= 0; i < project.picksPerRun; i++){
 			ran = project.rng();
 			for(var a= 0; a < species.length; a++){
@@ -71,10 +82,10 @@ $(document).ready(function(){
 				}
 				if(i == (project.picksPerRun - 1)){
 					for(var a = 0; a < species.length; a++){
-						var row = $("<td class='species-label'>" + species[a].sp_name + "</td><td class='hit'>" + species[a].sp_hit + "</td>");
+						var row = $("<tr><td class='species-label'>" + species[a].sp_name + "</td><td class='hit'>" + species[a].sp_hit + "</td></tr>");
 						row.appendTo(run_cont);
 						if(species[a].sp_hit == 0){
-							console.log(species[a].sp_name)
+							run_rich--;
 						}
 					}
 				}
@@ -82,10 +93,14 @@ $(document).ready(function(){
 			// Append Run Results to the Table
 			$('#results-table tbody').append(run_cont);
 		}
+
 		// Create Run Table Header
 		var header_el = document.createElement('h2');
 		header_el.innerHTML = "Run #" + (b+1);
 		$(header_el).insertBefore(run_cont);
+		// Set Run Richness
+		run_cont.append("<tr class='richness-run-" + b + "'><td><strong>Richness</strong></td><td class='richness'>" + run_rich + "</td></tr>")
+		// Set Run SDS
 		// Reset Hit Values
 		for(var a = 0; a < species.length; a++){
 			species[a].sp_hit = 0;
@@ -93,3 +108,11 @@ $(document).ready(function(){
 	}
 	$("tbody").collapse();
 });
+
+// Per Run
+// Richness = amount of species that got hits at all
+// SDS
+
+// Total Project
+// Average SDS
+// Standard Deviation
