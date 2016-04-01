@@ -5,52 +5,68 @@ filterInt = function (value) {
   return NaN;
 }
 
-function exportTableToCSV($table, filename) {
+function convertArrayOfObjectsToCSV(args) {
+        var result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
-    var $rows = $table.find('tr:has(td)'),
+        data = args.data || null;
+        if (data == null || !data.length) {
+            return null;
+        }
 
-        // Temporary delimiter characters unlikely to be typed by keyboard
-        // This is to avoid accidentally splitting the actual contents
-        tmpColDelim = String.fromCharCode(11), // vertical tab character
-        tmpRowDelim = String.fromCharCode(0), // null character
+        columnDelimiter = args.columnDelimiter || ',';
+        lineDelimiter = args.lineDelimiter || '\n';
 
-        // actual delimiter characters for CSV format
-        colDelim = '","',
-        rowDelim = '"\r\n"',
+        keys = Object.keys(data[0]);
 
-        // Grab text from table into CSV formatted string
-        csv = '"' + $rows.map(function (i, row) {
-            var $row = $(row),
-                $cols = $row.find('td');
+        result = '';
+        result += keys.join(columnDelimiter);
+        result += lineDelimiter;
 
-            return $cols.map(function (j, col) {
-                var $col = $(col),
-                    text = $col.text();
+        data.forEach(function(item) {
+            ctr = 0;
+            keys.forEach(function(key) {
+                if (ctr > 0) result += columnDelimiter;
 
-                return text.replace(/"/g, '""'); // escape double quotes
+                result += item[key];
+                ctr++;
+            });
+            result += lineDelimiter;
+        });
 
-            }).get().join(tmpColDelim);
+        return result;
+    }
 
-        }).get().join(tmpRowDelim)
-            .split(tmpRowDelim).join(rowDelim)
-            .split(tmpColDelim).join(colDelim) + '"',
+    function downloadCSV(args) {
 
-        // Data URI
-        csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+        var data, filename, link;
 
-    $(this)
-        .attr({
-        'download': filename,
-            'href': csvData,
-            'target': '_blank'
-    });
-}
+        var data_array = [];
+        $('tbody > tr').each(function(){
+        	var run = $(this).attr('id');
+        	var sds = $(this).find('.sds-val').text();
+        	var richness = $(this).find('.richness-val').text();
+        	var args = {
+        		'Run': run.match(/\d+/),
+        		'SDS': sds,
+        		'Richness': richness
+        	}
+        	data_array.push(args);
+        })
 
-// This must be a hyperlink
-$(".export").on('click', function (event) {
-    // CSV
-    exportTableToCSV.apply(this, [$('table#stat-table'), 'export.csv']);
-    
-    // IF CSV, don't do event.preventDefault() or return false
-    // We actually need this to be a typical hyperlink
-});
+        var csv = convertArrayOfObjectsToCSV({
+            data: data_array
+        });
+        if (csv == null) return;
+
+        filename = args.filename || 'export.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = 'data:text/csv;charset=utf-8,' + csv;
+        }
+        data = encodeURI(csv);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+    }
