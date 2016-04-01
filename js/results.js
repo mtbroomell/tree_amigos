@@ -69,8 +69,6 @@ $(document).ready(function(){
 		var run_cont = $('<tr id="run-' + (b+1) + '"></tr>')
 		// Richness Variable
 		var run_rich = project.numSpecies;
-		// SDS Variable
-		var SDS;
 
 		run_cont.append('<tr><th>Species Name</th><th>Hits</th></tr>')
 		for(var i= 0; i < project.picksPerRun; i++){
@@ -93,6 +91,8 @@ $(document).ready(function(){
 			// Append Run Results to the Table
 			$('#results-table tbody').append(run_cont);
 		}
+		var sds = project.sds(species, project);
+		run_cont.append("<tr class='sds-run-" + b + "'><td><strong>sds</strong></td><td class='sds'>" + sds + "</td></tr>")
 
 		// Create Run Table Header
 		var header_el = document.createElement('h2');
@@ -100,7 +100,6 @@ $(document).ready(function(){
 		$(header_el).insertBefore(run_cont);
 		// Set Run Richness
 		run_cont.append("<tr class='richness-run-" + b + "'><td><strong>Richness</strong></td><td class='richness'>" + run_rich + "</td></tr>")
-		// Set Run SDS
 		// Reset Hit Values
 		for(var a = 0; a < species.length; a++){
 			species[a].sp_hit = 0;
