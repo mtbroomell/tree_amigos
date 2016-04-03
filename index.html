@@ -13,19 +13,43 @@
 
 </head>
 <body>
-
-	<input type="text" id="name" placeholder="Name"></input>
-	<input type="text" id="title" placeholder="Title"></input>
-	<input type="number" id="runAmt" placeholder="Run Amount"></input>
-	<input type="number" id="numSpecies" placeholder="Number of Species"></input>
-	<input type="number" id="rangeMin" placeholder="Range Minimum"></input>
-	<input type="number" id="rangeMax" placeholder="Range Maximum"></input>
-	<input type="number" id="picksPerRun" placeholder="Picks Per Run"></input>
-	<input id="form_submit" type="submit" value="Run Form"></input>
-	<table>
-		<tbody id="species-container"></tbody>
-	</table>
-	<div id="results"></div>
+	<div id="input-container">
+		<h1>Tree Amigo S</h1>
+		<div>
+			<label for="name">Name</label>
+			<input type="text" id="name" placeholder="Name"></input>
+		</div>
+		<div>
+			<label for="title">Project Title</label>
+			<input type="text" id="title" placeholder="Title"></input>
+		</div>
+		<div>
+			<label for="runAmt">Run Amount</label>
+			<input type="number" id="runAmt" placeholder="Run Amount"></input>
+		</div>
+		<div>
+			<label for="numSpecies">Number of Species</label>
+			<input type="number" id="numSpecies" placeholder="Number of Species"></input>
+		</div>
+		<div>
+			<label for="rangeMin">Minimum Range</label>
+			<input type="number" id="rangeMin" placeholder="Range Minimum"></input>
+		</div>
+		<div>
+			<label for="rangeMax">Maximum Range</label>
+			<input type="number" id="rangeMax" placeholder="Range Maximum"></input>
+		</div>
+		<div>
+			<label for="picksPerRun">Picks Per Run</label>
+			<input type="number" id="picksPerRun" placeholder="Picks Per Run"></input>
+		</div>
+		<div>
+			<input id="form_submit" type="submit" value="Run Form"></input>
+		</div>		
+		<table>
+			<tbody id="species-container"></tbody>
+		</table>
+	</div><!--#input-container-->
 
 </body>
 </html>

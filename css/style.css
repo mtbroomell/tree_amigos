@@ -856,6 +856,26 @@ there.
   margin: 0 auto;
 }
 
+#input-container {
+  width: 650px;
+  margin: 100px auto;
+  text-align: center;
+}
+
+#input-container > div {
+  display: inline-block;
+}
+
+#input-container > div input {
+  float: left;
+  clear: both;
+}
+
+label {
+  display: inline-block;
+  float: left;
+}
+
 td, th{
   min-width: 100px;
   text-align: center;
