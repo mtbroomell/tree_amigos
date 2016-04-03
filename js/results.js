@@ -77,13 +77,13 @@ $(document).ready(function(){
 				if(ran >= species[a].sp_low && ran <= species[a].sp_high) {
 					species[a].sp_hit += 1;
 					$("#" + species[a].sp_name + "-row .hit").text(species[a].sp_hit);
-				}
-				if(i == (project.picksPerRun - 1)){
-					for(var a = 0; a < species.length; a++){
-						var row = $("<tr><td class='species-label'>" + species[a].sp_name + "</td><td class='hit'>" + species[a].sp_hit + "</td></tr>");
-						row.appendTo(run_cont);
-						if(species[a].sp_hit == 0){
-							run_rich--;
+					if(i == (project.picksPerRun - 1)){
+						for(var a = 0; a < species.length; a++){
+							var row = $("<tr><td class='species-label'>" + species[a].sp_name + "</td><td class='hit'>" + species[a].sp_hit + "</td></tr>");
+							row.appendTo(run_cont);
+							if(species[a].sp_hit == 0){
+								run_rich--;
+							}
 						}
 					}
 				}
@@ -92,7 +92,7 @@ $(document).ready(function(){
 			$('#results-table tbody').append(run_cont);
 		}
 		var sds = project.sds(species, project);
-		run_cont.append("<tr class='sds'><td class='label'><strong>SDS</strong></td><td class='sds-val'>" + sds + "</td></tr>")
+		run_cont.append("<tr class='sds'><td class='label'><strong>SDS</strong></td><td class='sds-val'>" + sds + "</td></tr>");
 
 		// Create Run Table Header
 		var header_el = document.createElement('h2');
